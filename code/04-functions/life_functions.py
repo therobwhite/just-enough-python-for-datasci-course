@@ -3,7 +3,7 @@ import random
 import time
 import typing
 
-# TODO: Note, this is only partially final, still needs functions, next chapter.
+# region Game constants
 
 # ANSI color codes
 ALIVE_CHAR: typing.Final[str] = '\033[92mO\033[0m'  # green O
@@ -15,34 +15,23 @@ SURVIVING_COUNTS: typing.Final[set[int]] = {2, 3}
 IS_ALIVE: typing.Final[int] = 1
 REVIVED_COUNT: typing.Final[int] = 3
 
-# Game params
-rows: typing.Final[int] = 20
-cols: typing.Final[int] = 50
-generations: typing.Final[int] = 100
-delay: typing.Final[float] = 0.1
+# endregion
 
-# initialize random grid
-# noinspection DuplicatedCode
-grid = [[random.randint(0, 1) for _ in range(cols)] for _ in range(rows)]
 
-for gen in range(1, generations + 1):
-    # noinspection DuplicatedCode
-    os.system('cls' if os.name == 'nt' else 'clear')
-    alive_count = sum(sum(row) for row in grid)
-    # header
-    print(
-        HEADER_COL
-        + f' Game of Life | Generation {gen}/{generations} | Alive: {alive_count} '.center(cols, '=')
-        + RESET_COL
-    )
-    # grid display
-    for row in grid:
-        print(''.join(ALIVE_CHAR if cell else DEAD_CHAR for cell in row))
-    # update
+def game_of_life(rows: int = 20, cols: int = 50, generations: int = 100, delay: float = 0.1):
+    grid = initialize_grid(cols, rows)
+    for gen in range(1, generations + 1):
+        display_grid(cols, gen, generations, grid)
+        grid = run_one_generation(grid)
+        time.sleep(delay)
+
+
+def run_one_generation(grid):
+    rows = len(grid)
+    cols = len(grid[0])
 
     old_grid = grid
     grid: list[list[int]] = []
-
     for i in range(rows):
         new_row = []
         for j in range(cols):
@@ -64,5 +53,30 @@ for gen in range(1, generations + 1):
                 new_row.append(1 if neighbor_count == REVIVED_COUNT else 0)
 
         grid.append(new_row)
+    return grid
 
-    time.sleep(delay)
+
+def display_grid(cols, gen, generations, grid):
+    alive_count = count_alive_cells(grid)
+    os.system('cls' if os.name == 'nt' else 'clear')
+    # header
+    print(
+        HEADER_COL
+        + f' Game of Life | Generation {gen}/{generations} | Alive: {alive_count} '.center(cols, '=')
+        + RESET_COL
+    )
+    # grid display
+    for row in grid:
+        print(''.join(ALIVE_CHAR if cell else DEAD_CHAR for cell in row))
+
+
+def count_alive_cells(grid: list[list[int]]) -> int:
+    alive_count = sum(sum(row) for row in grid)
+    return alive_count
+
+
+def initialize_grid(cols: int, rows: int):
+    # initialize random grid
+    # noinspection DuplicatedCode
+    grid = [[random.randint(0, 1) for _ in range(cols)] for _ in range(rows)]
+    return grid
