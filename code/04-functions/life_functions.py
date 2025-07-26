@@ -80,3 +80,7 @@ def initialize_grid(cols: int, rows: int):
     # noinspection DuplicatedCode
     grid = [[random.randint(0, 1) for _ in range(cols)] for _ in range(rows)]
     return grid
+
+
+if __name__ == '__main__':
+    game_of_life()
