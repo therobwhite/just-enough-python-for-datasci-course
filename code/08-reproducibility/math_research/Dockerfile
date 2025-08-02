@@ -14,6 +14,8 @@ RUN uv pip install -r requirements.txt
 
 COPY src/ /app
 
+RUN rm requirements.*
+
 EXPOSE 9000
 CMD ["uv", "run", "jupyter", "lab", "--config=/app/config/jupyter_server_config.py"]
 

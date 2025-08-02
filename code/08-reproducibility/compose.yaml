@@ -14,4 +14,8 @@ services:
       dockerfile: Dockerfile
     container_name: math_research
     image: math_research
+    working_dir: /app
+    ports:
+      - "9000:9000"
     platform: linux/amd64
+
