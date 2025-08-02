@@ -1,2 +1,10 @@
 services:
 
+  linux_math_base:
+    build:
+      context: ./linux_math_base
+      dockerfile: Dockerfile
+    container_name: linux-math-base
+    image: linux-math-base
+    platform: linux/amd64
+

@@ -6,14 +6,17 @@ ENV LC_ALL=en_US.UTF-8
 ENV TZ="America/Los_Angeles"
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install Node.js for Jupyter extensions and widgets
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get autoremove -y
+
 RUN apt-get install -y curl gnupg
+
+# Install Node.js for Jupyter extensions and widgets
 RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
 RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
 
 RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get autoremove -y
 
 RUN apt-get install -y nodejs
 
@@ -26,6 +29,8 @@ RUN apt-get install -y zsh
 RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.2.0/zsh-in-docker.sh)" -- -t robbyrussell
 
 RUN update-ca-certificates
+
+# RUN apt install -y git
 
 # Install uv first to manage Python apps.
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
