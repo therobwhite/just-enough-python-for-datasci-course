@@ -10,7 +10,9 @@ RUN uv venv --python 3.13.5 /venv
 
 COPY src/requirements.txt /app
 
-RUN uv pip install -r requirements.txt
+RUN echo "Hello version kick!!!"
+
+RUN --mount=type=cache,target=/root/.cache uv pip install -r requirements.txt
 
 COPY src/ /app
 
