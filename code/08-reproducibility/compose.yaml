@@ -8,3 +8,10 @@ services:
     image: linux-math-base
     platform: linux/amd64
 
+  math_research:
+    build:
+      context: ./math_research
+      dockerfile: Dockerfile
+    container_name: math_research
+    image: math_research
+    platform: linux/amd64
