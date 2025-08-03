@@ -1,3 +1,5 @@
 httpx
 jupyterlab
 pytest
+matplotlib
+seaborn
