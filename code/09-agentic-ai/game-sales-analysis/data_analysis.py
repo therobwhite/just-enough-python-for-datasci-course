@@ -136,7 +136,7 @@ def analyze_year_trends(df: pd.DataFrame) -> Dict[str, any]:
     print('=== Gaming Industry Timeline ===')
     print(f'📅 Dataset covers: {year_stats["earliest_year"]:.0f} - {year_stats["latest_year"]:.0f}')
     print(f'📊 Median release year: {year_stats["median_year"]:.0f}')
-    games_by_year = df_with_years.groupby("Year").size()
+    games_by_year = df_with_years.groupby('Year').size()
     peak_year = games_by_year.idxmax()
     peak_count = games_by_year.max()
     print(f'🎮 Peak gaming year: {peak_year:.0f} ({peak_count} games)')

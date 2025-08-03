@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-
 def setup_display_options() -> None:
     """Configure pandas and matplotlib display options for better output."""
     # Pandas display options
