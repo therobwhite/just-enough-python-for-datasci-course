@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     container_name: linux-math-base
     image: linux-math-base
-    platform: linux/amd64
+#    platform: linux/amd64
 
   math_research:
     build:
@@ -19,5 +19,5 @@ services:
       - ./math_research/data:/data
     ports:
       - "9000:9000"
-    platform: linux/amd64
+#    platform: linux/amd64
 
