@@ -19,5 +19,7 @@ services:
       - ./math_research/data:/data
     ports:
       - "9000:9000"
+    depends_on:
+      - linux_math_base
 #    platform: linux/amd64
 
