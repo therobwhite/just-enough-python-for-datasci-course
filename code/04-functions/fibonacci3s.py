@@ -1,3 +1,6 @@
+import datetime
+
+
 def three_fib(n: int) -> list[int]:
     if n == 0:
         fib_three = [0]
@@ -22,7 +25,17 @@ def fibonacci(n: int) -> list[int]:
         for i in range(2, n):
             fib_sequence.append(fib_sequence[i - 1] + fib_sequence[i - 2])
     return fib_sequence
-    
 
-print(fibonacci(5))
-print(three_fib(5))
+t0 = datetime.datetime.now()
+fib = (fibonacci(1000000))
+t1 = datetime.datetime.now()
+print(f"Elapsed time for fibonacci: {t1 - t0}")
+t0 = datetime.datetime.now()
+my_fib =(three_fib(1000000))
+t1 = datetime.datetime.now()
+print(f"Elapsed time for three_fib: {t1 - t0}")
+
+if __name__ == "__main__":
+    pass()
+
+    
